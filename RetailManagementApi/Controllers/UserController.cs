@@ -10,6 +10,7 @@ using REPOSITORY.UnitOfWork;
 
 namespace RetailManagementApi.Controllers
 {
+    //[Authorize]
     [ApiVersion("1.0")]
     [Produces("application/json")]
     [ApiController]

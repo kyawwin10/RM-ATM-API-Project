@@ -9,7 +9,7 @@ using REPOSITORY.UnitOfWork;
 
 namespace RetailManagementApi.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiVersion("1.0")]
     [Produces("application/json")]
     [ApiController]
@@ -88,11 +88,11 @@ namespace RetailManagementApi.Controllers
             try
             {
                 var result = await _saleService.SalesReport();
-                return Ok(result);
+                return Ok(new ResponseModel { Message = "Sale Report Successfully", Status = APIStatus.Success, Data = result });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message });
+                return Ok(new ResponseModel{ Message = ex.Message, Status = APIStatus.Error });
             }
         }
     }

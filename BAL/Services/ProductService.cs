@@ -44,7 +44,7 @@ namespace BAL.Services
         {
             try
             {
-                var product_data = (await _unitOfWork.Products.GetByCondition(x => x.ProductID == productID)).FirstOrDefault();
+                var product_data = (await _unitOfWork.Products.GetByCondition(x => x.ProductID == productID && x.ActiveFlag)).FirstOrDefault();
                 if (product_data == null)
                 {
                     throw new KeyNotFoundException($"Product with ID {productID} was not found.");
@@ -117,10 +117,10 @@ namespace BAL.Services
         {
             try
             {
-                var product_data = (await _unitOfWork.Products.GetByCondition(x => x.ProductID == inputModel.ProductID)).FirstOrDefault();
+                var product_data = (await _unitOfWork.Products.GetByCondition(x => x.ProductID == inputModel.ProductID && x.ActiveFlag)).FirstOrDefault();
 
                 // Check if the product exists
-                if (product_data == null || !product_data.ActiveFlag)
+                if (product_data == null)
                 {
                     throw new Exception("Product not found.");
                 }
